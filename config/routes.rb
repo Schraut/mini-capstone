@@ -1,3 +1,24 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # Users routes
+  post 'user_token' => 'user_token#create'
+  
+  post "/users" => "users#create"
+  
+  # Products routes
+  get '/mini-capstone/:single_product' => 'products#find_single_product'
+
+  get '/item_finder' => 'products#find_item'
+
+  get '/products' => 'products#index'
+
+  get '/product/:id' => 'products#show'
+
+  post '/products' => 'products#create'
+
+  patch '/product/:id' => 'products#show'
+
+  patch '/products/:id' => 'products#update'
+
+  delete '/products/:id' => 'products#destroy'
+
 end
