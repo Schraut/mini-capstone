@@ -1,8 +1,9 @@
 class Product < ApplicationRecord
+  
+  has_many :orders
   belongs_to :supplier
-  has_many :images
   has_many :carted_products
-  has_many :orders, through: :carted_products
+  has_many :categories, through: :carted_products
   
   validates :price, presence: true
   validates :price, numericality: true

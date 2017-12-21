@@ -27,12 +27,12 @@ class ProductsController < ApplicationController
   # end
 
   def index 
-    # products = Product.all
-    #  # the_search_term = params[:search_term] 
-    #  # products = Product.order(:id => :asc).where("title LIKE ?", "%#{the_search_term}")
+    products = Product.all
+    # the_search_term = params[:search_term] 
+    # products = Product.order(:id => :asc).where("title LIKE ?", "%#{the_search_term}")
     # render json: products.as_json
-    category = Category.find_by(id: params[:category_id_input])
-    products = category.products 
+    # category = Category.find_by(id: params[:category_id_input])
+    # products = category.products 
 
     render json: products.as_json
   end
@@ -52,11 +52,11 @@ class ProductsController < ApplicationController
     )
     product.save
     render json: product.as_json
-    # if product.save
-    #   render json: product.as_json
-    # else
-    #   render json: {errors: product.errors.full_message}
-    # end
+    if product.save
+      render json: product.as_json
+    else
+      render json: {errors: product.errors.full_message}
+    end
   end
 
   def update

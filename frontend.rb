@@ -15,6 +15,7 @@ p "[6] to type in some attributes you want for the product"
 p "[7] to sign up"
 p "[8] to login"
 p "[9] to logout"
+p "[10] add items to your shopping cart"
 
 user_input = gets.chomp
 base_url = "http://localhost:3000"
@@ -115,8 +116,20 @@ elsif user_input == "8"
       }
   )
   pp response.body
-else user_input == "9"
+elsif user_input == "9"
 
+elsif user_input == "10"
+  p "enter the product_id"
+  product_id = gets.chomp
+  p "enter the quantity"
+  quantity = gets.chomp
+  reponse = Unirest.post("#{base_url}
+/carted_products",
+parameters: {
+  product_id: product_id,
+  quantity: quantity
+  })
+  pp response.body
 end
 
 
