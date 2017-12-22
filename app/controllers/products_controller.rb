@@ -1,6 +1,16 @@
 class ProductsController < ApplicationController
-  #before_action :authenticate_admin, only: [:create, :update, :destroy]
+  before_action :authenticate_admin, only: [:create, :update, :destroy]
 
+  def index 
+    products = Product.all
+    # the_search_term = params[:search_term] 
+    # products = Product.order(:id => :asc).where("title LIKE ?", "%#{the_search_term}")
+    # render json: products.as_json
+    # category = Category.find_by(id: params[:category_id_input])
+    # products = category.products 
+
+    render json: products.as_json
+  end
 
   def show_products
     my_store = Product.all
@@ -22,21 +32,6 @@ class ProductsController < ApplicationController
     render json: {message: 'hello'}
   end
 
-  # def index
-  #   render json: {message: 'it works!'}
-  # end
-
-  def index 
-    products = Product.all
-    # the_search_term = params[:search_term] 
-    # products = Product.order(:id => :asc).where("title LIKE ?", "%#{the_search_term}")
-    # render json: products.as_json
-    # category = Category.find_by(id: params[:category_id_input])
-    # products = category.products 
-
-    render json: products.as_json
-  end
-
   def show 
     the_id = params['id']
     product = Product.find_by(id: params['id'])
@@ -50,12 +45,12 @@ class ProductsController < ApplicationController
       image: params['image'],
       description: params['description'] 
     )
-    product.save
-    render json: product.as_json
+    
+    
     if product.save
       render json: product.as_json
     else
-      render json: {errors: product.errors.full_message}
+      render json: {errors: product.errors.full_messages}
     end
   end
 
@@ -76,7 +71,7 @@ class ProductsController < ApplicationController
   def destroy 
     the_id = params['id']
     product = Product.find_by(id: the_id)
-    recipe.destroy
+    product.destroy
   end
 
 end
